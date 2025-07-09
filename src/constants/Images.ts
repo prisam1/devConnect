@@ -1,0 +1,43 @@
+export const IMAGES = {
+ pritam:require("../assets/pritam.jpg"),
+ react :require("../assets/react.png"),
+ native :require("../assets/native.png"),
+ mongo :require("../assets/mongo.png"),
+ feathers :require("../assets/feathers.png"),
+ javascript :require("../assets/javascript.png"),
+ postgres :require("../assets/postgres.png"),
+ typescript :require("../assets/typescript.png"),
+ ionic :require("../assets/ionic.png"),
+ expo :require("../assets/expo.png"),
+ aws :require("../assets/aws.png"),
+ express :require("../assets/express.png"),
+ git :require("../assets/git.png"),
+ next :require("../assets/next.jpg"),
+ nest :require("../assets/nest.png"),
+ vscode :require("../assets/vscode.png"),
+ tailwind :require("../assets/tailwind.jpg"),
+ postman :require("../assets/postman.png"),
+ html :require("../assets/htmlcssjs.jpg"),
+ redis :require("../assets/redis.png"),
+ redux :require("../assets/redux.png"),
+ github :require("../assets/github.png"),
+ python :require("../assets/python.png"),
+ cLanguage :require("../assets/c.png"),
+ sql :require("../assets/sql.png"),
+ noSql :require("../assets/nosql.png"),
+ pgAdmin :require("../assets/pgAdmin.webp"),
+ firebase :require("../assets/firebase.png"),
+
+ // projects
+ feedTask :require("../assets/project/feedTask.png"), 
+ todo :require("../assets/project/todo.png"), 
+ hoichoi :require("../assets/project/hoichoi.png"), 
+ imgSearch :require("../assets/project/imageSearch.png"), 
+ reactApp :require("../assets/project/react.png"), 
+ url :require("../assets/project/urlShortener.png"), 
+ news :require("../assets/project/news.png"), 
+ itinerary:require("../assets/project/itinerary.png"),
+ randomImg:require("../assets/project/randomImg.png")
+ 
+}
+  
