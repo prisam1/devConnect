@@ -1,11 +1,24 @@
 import axios from "axios";
+import { isMobile } from "../utils/detectDevice";
 
 const API_URL = process.env.REACT_APP_API_BASE_URL;
 
 
 const api = axios.create({
   baseURL: API_URL,
-  withCredentials: true,
+  withCredentials: !isMobile(), // Enable credentials only for desktop users
+});
+
+
+//Attach token dynamically for mobile users
+api.interceptors.request.use((config) => {
+  if (isMobile()) {
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+  }
+  return config;
 });
 
 export default api;
