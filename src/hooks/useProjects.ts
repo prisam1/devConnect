@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"; 
+import { useState, useEffect, useCallback } from "react"; 
 import { addProject, getAllProjects, getProjectById } from "../services/projectService";
 import { ProjectType } from "../types";
 import { useNavigate } from "react-router-dom";
@@ -62,7 +62,7 @@ export const useGetProjects = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
   
-    const fetch = async () => {
+    const fetch = useCallback(async () => {
       if (!id) return;
       setLoading(true);
       try {
@@ -73,11 +73,11 @@ export const useGetProjects = () => {
       } finally {
         setLoading(false);
       }
-    };
+    }, [id]);
   
     useEffect(() => {
       fetch();
-    }, [id]);
+    }, [fetch]);
   
-    return { project, loading, error, refetch:fetch }; // include refetch
+    return { project, loading, error, refetch: fetch, setProject };
   };

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useGetProjects } from "../../hooks/useProjects";
 import { Link, useNavigate } from "react-router-dom";
 import { useSearch } from "../../hooks/useSearch";
@@ -12,9 +11,6 @@ export default function Dashboard() {
 
   const displayProjects = query ? searchProjects : projects;
 
-  const handleProject = () => {
-
-  }
 
   return (
     <div className="max-w-4xl mx-auto p-4">

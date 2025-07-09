@@ -1,6 +1,6 @@
 import { useState } from "react"; 
 import { login, signUp } from "../services/authServices";
-import { LoginCredentials, SignUpCredentials, UserType } from "../types";
+import { LoginCredentials, SignUpCredentials } from "../types";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUserDetails } from "../redux/slices/userSlice";

@@ -1,5 +1,5 @@
 import api from "../api/axios";
-import { LoginCredentials, LoginResponse, SignUpCredentials, SignUpResponse, UserType } from "../types";
+import { LoginCredentials, LoginResponse, SignUpCredentials, SignUpResponse } from "../types";
 
 export const signUp = async (credentials: SignUpCredentials): Promise<SignUpResponse> => {
   const response = await api.post<SignUpResponse>("/auth/signup", credentials);
