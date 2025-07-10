@@ -7,10 +7,11 @@ export default function Dashboard() {
   const navigate = useNavigate();
 
   const { projects, loading: projectLoading, error: projectError } = useGetProjects();
-  const { query, setQuery, projects: searchProjects, users, loading, error, handleSearch } = useSearch();
+  const { query, setQuery, projects: searchProjects, users, loading, error, } = useSearch();
 
   const displayProjects = query ? searchProjects : projects;
 
+  
 
   return (
     <div className="max-w-4xl mx-auto p-4">
@@ -24,7 +25,7 @@ export default function Dashboard() {
         </button>
       </div>
 
-      <form onSubmit={handleSearch} className="mb-4">
+      <form  onSubmit={(e) => e.preventDefault()} className="mb-4">
         <input
           type="text"
           value={query}
@@ -54,7 +55,8 @@ export default function Dashboard() {
             </Link>
             <p className="text-sm text-gray-700">{project.description}</p>
             <p className="text-xs text-gray-400">by {project.creator.username}</p>
-            <p className="text-xs text-gray-400">Links: {project.links.join(", ")}</p>
+            <p className="text-xs text-gray-400">Live: {project.liveLink}</p>
+            <p className="text-xs text-gray-400">Github: {project.liveLink}</p>
           </div>
         ))}
       </div>

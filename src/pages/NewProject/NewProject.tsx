@@ -6,7 +6,7 @@ export default function NewProject() {
   return (
     <form onSubmit={handleSubmit} className="max-w-2xl mx-auto mt-10 p-6 bg-white shadow rounded">
       <h1 className="text-2xl font-bold mb-4">Add New Project</h1>
-     
+
       <input
         name="title"
         placeholder="Project Title"
@@ -22,15 +22,23 @@ export default function NewProject() {
         className="w-full mb-3 p-2 border rounded h-24"
         required />
       <input
-        name="links"
-        placeholder="Links (comma separated)"
-        value={form.links}
+        name="liveLink"
+        placeholder="Live Link"
+        value={form.liveLink}
+        onChange={handleChange}
+        className="w-full mb-3 p-2 border rounded"
+         />
+
+      <input
+        name="gitHubLink"
+        placeholder="GitHub"
+        value={form.gitHubLink}
         onChange={handleChange}
         className="w-full mb-3 p-2 border rounded"
         required />
 
       {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
-    
+
       <button
         type="submit"
         className="w-full bg-blue-600 text-white py-2 rounded"

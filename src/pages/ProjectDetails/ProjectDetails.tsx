@@ -16,19 +16,28 @@ export default function ProjectDetail() {
       <h1 className="text-2xl text-black font-bold mb-2">{project?.project?.title}</h1>
       <p className="text-gray-600 mb-2">by {project?.project?.creator?.username}</p>
       <p className="mb-4">{project?.project?.description}</p>
-      {project?.project?.links}
-      <a href={project?.project?.links.join(", ")} target="_blank" rel="noreferrer" className="text-sm text-blue-600 ">{project?.project?.links.join(", ")}</a>
+      {/* {project?.project?.links} */}
+      <div className="flex flex-col">
+        <div className="">
+          Live - <a href={project?.project?.liveLink} target="_blank" rel="noreferrer" className="text-sm text-blue-600 ">{project?.project?.liveLink}</a>
+        </div>
+        <div className="">
+          GitHub - <a href={project?.project?.gitHubLink} target="_blank" rel="noreferrer" className="text-sm text-blue-600 ">{project?.project?.gitHubLink}</a>
+
+        </div>
+      </div>
       <hr className="my-6" />
 
       <h2 className="text-xl font-semibold mb-2">Comments</h2>
-      <ul className="mb-4 space-y-2">
+      <div className="mb-4 space-y-2">
         {(project?.comments ?? []).map((c: any) => (
-          <li key={c._id} className="bg-gray-100 p-2 rounded">
-            <p className="text-sm text-gray-800">{c.comments}</p>
-            {/* <p className="text-xs text-gray-500">– {c.author.username}</p> */}
-          </li>
+          <div key={c._id} className="bg-gray-100 p-2 items-center rounded flex flex-row">
+            <p className="text-xs text-gray-500">{c.userId?.username} - </p>
+            <p className="text-sm font-medium text-gray-800"> {c.comments}</p>
+
+          </div>
         ))}
-      </ul>
+      </div>
 
       <form onSubmit={handleSubmit} className="mt-4">
         <textarea

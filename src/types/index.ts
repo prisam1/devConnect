@@ -16,17 +16,18 @@ export interface LoginCredentials {
 export interface LoginResponse extends UserType {}
 
 
-export interface AddProjectPayload {
-  title: string;
-  description: string;
-  links: string[];
-}
+// export interface AddProjectPayload {
+//   title: string;
+//   description: string;
+//   link: string;
+// }
 
 export interface ProjectResponse {
   _id: string;
   title: string;
   description: string;
-  links: string[];
+  liveLink?: string;
+  gitHubLink?:string;
   creator: {
     _id: string;
     username: string;
@@ -66,7 +67,8 @@ export interface UpdateProfilePayload {
   username: string;
   bio?: string;
   avatar?: string;
-  links?: string[];
+  liveLink?: string;
+  gitHubLink?:string;
 }
 
 
@@ -76,14 +78,16 @@ export interface UserType {
   email: string;
   avatar?: string;
   bio?: string;
-  links: string[];
+  liveLink?: string;
+  gitHubLink?:string;
 }
 
 export interface ProjectType {
   _id: string;
   title: string;
   description: string;
-  links: string[];
+  liveLink?: string;
+  gitHubLink?:string;
   creator: UserType;
 }
 

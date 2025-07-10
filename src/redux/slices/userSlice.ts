@@ -6,7 +6,8 @@ export interface UserState {
   email: string;
   avatar?: string;
   bio?: string;
-  links: string[];
+  liveLink?:string;
+  gitHubLink?: string;
 }
 
 const initialState: UserState = {
@@ -15,7 +16,8 @@ const initialState: UserState = {
   email: "",
   avatar: "",
   bio: "",
-  links: []
+  liveLink:"",
+  gitHubLink: ""
 };
 
 export const userSlice = createSlice({

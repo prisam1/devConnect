@@ -1,4 +1,4 @@
-import { useState } from 'react'; 
+import { useEffect, useState } from 'react'; 
 import { searchUsersAndProjects } from '../services/searchService';
 import { ProjectType, UserType } from '../types';
 
@@ -15,18 +15,36 @@ export interface SearchResult {
 
  
 export const useSearch = () => {
-    const [query, setQuery] = useState("");
-    const [projects, setProjects] = useState<ProjectType[]>([]);
-    const [users, setUsers] = useState<UserType[]>([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
-  
-    const handleSearch = async (e: React.FormEvent) => {
-      e.preventDefault();
+  const [query, setQuery] = useState("");
+  const [debouncedQuery, setDebouncedQuery] = useState("");
+  const [projects, setProjects] = useState<ProjectType[]>([]);
+  const [users, setUsers] = useState<UserType[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  // Debounce effect
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedQuery(query);
+    }, 500); // 500ms delay
+
+    return () => clearTimeout(handler);
+  }, [query]);
+
+  // Search when debouncedQuery changes
+  useEffect(() => {
+    if (!debouncedQuery.trim()) {
+      setProjects([]);
+      setUsers([]);
+      return;
+    }
+
+    const fetchSearchResults = async () => {
       setLoading(true);
       setError(null);
       try {
-        const res = await searchUsersAndProjects(query);
+        const res = await searchUsersAndProjects(debouncedQuery);
+        console.log("->",res)
         setProjects(res.projects);
         setUsers(res.users);
       } catch (err: any) {
@@ -35,6 +53,9 @@ export const useSearch = () => {
         setLoading(false);
       }
     };
-  
-    return { query, setQuery, projects, users, loading, error, handleSearch };
-  };
+
+    fetchSearchResults();
+  }, [debouncedQuery]);
+
+  return { query, setQuery, projects, users, loading, error };
+};

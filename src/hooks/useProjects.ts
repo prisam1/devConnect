@@ -27,7 +27,7 @@ export const useGetProjects = () => {
   };
 
   export const useAddProject = () => {
-    const [form, setForm] = useState({ title: "", description: "", links: "" });
+    const [form, setForm] = useState({ title: "", description: "", liveLink: "", gitHubLink:"" });
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
@@ -41,10 +41,7 @@ export const useGetProjects = () => {
       setError(null);
       setLoading(true);
       try {
-        await addProject({
-          ...form,
-          links: form.links.split(",").map((link) => link.trim()),
-        });
+        await addProject(form);
         navigate("/dashboard");
       } catch (err: any) {
         setError(err.response?.data?.message || err.message);
