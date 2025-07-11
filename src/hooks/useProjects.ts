@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react"; 
-import { addProject, getAllProjects, getProjectById } from "../services/projectService";
+import { addProject, getAllProjects, getProjectById, getProjectsByUserId } from "../services/projectService";
 import { ProjectType } from "../types";
 import { useNavigate } from "react-router-dom";
 
@@ -78,3 +78,40 @@ export const useGetProjects = () => {
   
     return { project, loading, error, refetch: fetch, setProject };
   };
+
+  export const useGetProjectsByUserId = () => {
+    const [selectedUserProjects, setSelectedUserProjects] = useState<ProjectType[] | null>(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+   
+    const handleUserClick = async (userId?: string) => {
+      setLoading(true);
+      setError(null);
+      try {
+        if(userId)
+       { 
+        const res = await getProjectsByUserId(userId);
+        setSelectedUserProjects(res);
+      }
+      } catch (err: any) {
+        console.error("Failed to load user projects", err);
+        setError("Could not load user projects");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    const clearSelectedUserProjects = () => {
+      setSelectedUserProjects(null);
+    };
+  
+    return {  
+      selectedUserProjects,
+      handleUserClick,
+      clearSelectedUserProjects,
+      loading,
+      error
+    };
+  };
+
+  

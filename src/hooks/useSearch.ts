@@ -1,19 +1,7 @@
 import { useEffect, useState } from 'react'; 
 import { searchUsersAndProjects } from '../services/searchService';
-import { ProjectType, UserType } from '../types';
+import { ProjectType, UserType } from '../types'; 
 
-export interface SearchResult {
-  _id: string;
-  username: string;
-  bio?: string;
-  projects?: {
-    _id: string;
-    title: string;
-    description?: string;
-  }[];
-}
-
- 
 export const useSearch = () => {
   const [query, setQuery] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");
@@ -44,7 +32,6 @@ export const useSearch = () => {
       setError(null);
       try {
         const res = await searchUsersAndProjects(debouncedQuery);
-        console.log("->",res)
         setProjects(res.projects);
         setUsers(res.users);
       } catch (err: any) {

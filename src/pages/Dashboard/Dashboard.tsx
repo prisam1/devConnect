@@ -1,4 +1,4 @@
-import { useGetProjects } from "../../hooks/useProjects";
+import { useGetProjects, useGetProjectsByUserId } from "../../hooks/useProjects";
 import { Link, useNavigate } from "react-router-dom";
 import { useSearch } from "../../hooks/useSearch";
 
@@ -8,10 +8,14 @@ export default function Dashboard() {
 
   const { projects, loading: projectLoading, error: projectError } = useGetProjects();
   const { query, setQuery, projects: searchProjects, users, loading, error, } = useSearch();
+  const { selectedUserProjects, handleUserClick, clearSelectedUserProjects } = useGetProjectsByUserId()
 
-  const displayProjects = query ? searchProjects : projects;
-
-  
+  const displayProjects =
+    query && users.length > 0 && selectedUserProjects
+      ? selectedUserProjects
+      : query
+        ? searchProjects
+        : projects;
 
   return (
     <div className="max-w-4xl mx-auto p-4">
@@ -25,7 +29,7 @@ export default function Dashboard() {
         </button>
       </div>
 
-      <form  onSubmit={(e) => e.preventDefault()} className="mb-4">
+      <form onSubmit={(e) => e.preventDefault()} className="mb-4">
         <input
           type="text"
           value={query}
@@ -39,19 +43,50 @@ export default function Dashboard() {
       {(error || projectError) && <p className="text-red-500">{error || projectError}</p>}
 
 
-      {query && users.length === 0 && searchProjects.length === 0 && (
-        <p className="text-gray-600">No matching user or project found.</p>
+      {query && searchProjects.length === 0 && (
+        <p className="text-gray-600">No project found.</p>
       )}
 
+      {query && users.length === 0 && (
+        <p className="text-gray-600">No user found.</p>
+      )}
+
+      {query && users.length > 0 && (
+        <div className="mb-6">
+          <h2 className="text-xl font-bold mb-2 text-gray-800">Users</h2>
+          <div className="space-y-2">
+            {users?.map((user) => (
+              <div
+                key={user._id}
+                onClick={() => handleUserClick(user?._id)}
+                className="border p-3 rounded shadow bg-gray-100 cursor-pointer hover:bg-gray-200"
+              >
+                <p className="font-semibold text-blue-700">{user.username}</p>
+                <p className="text-sm text-gray-600">{user.bio}</p>
+                {user?.gitHubLink && (
+                  <p className="text-sm text-gray-500">
+                    Github: {user.gitHubLink}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+          <hr className="my-4" />
+        </div>
+      )}
+
+      {displayProjects && users.length > 0 && displayProjects.length === 0 && (
+        <p className="text-gray-600">No project found for the selected.</p>
+      )}
 
       <div className="space-y-4 ">
         {displayProjects.map((project) => (
           <div
             key={project._id}
             onClick={() => navigate(`/projects/${project._id}`)}
-            className="border p-4 font-medium rounded shadow bg-white">
+            className="border p-4 font-medium cursor-pointer rounded shadow bg-white">
             <Link to={`/projects/${project._id}`} className="text-lg font-semibold text-blue-600 hover:underline">
-            {project.title}
+              {project.title}
             </Link>
             <p className="text-sm text-gray-700">{project.description}</p>
             <p className="text-xs text-gray-400">by {project.creator.username}</p>

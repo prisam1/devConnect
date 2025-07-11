@@ -16,10 +16,10 @@ export const addProject = async (data: { title: string; description: string; liv
   return response.data;
 };
 
-// export const addComment = async (projectId: string, text: string): Promise<CommentType> => {
-//   const response = await api.post<CommentType>(`/projects/${projectId}/comments`, { text });
-//   return response.data;
-// };
+export const getProjectsByUserId = async (userId: string): Promise<ProjectType[]> => {
+  const response = await api.get(`/projects/${userId}`);
+  return response.data;
+};
 
 export const addComment = async (
   projectId: string,
