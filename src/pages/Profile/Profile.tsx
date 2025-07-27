@@ -7,8 +7,7 @@ export default function ProfilePage() {
     username: profile?.username || "",
     bio: profile?.bio || ""
   });
-
-//   console.log("-->",profile)
+ 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };

@@ -8,7 +8,7 @@ export default function Dashboard() {
 
   const { projects, loading: projectLoading, error: projectError } = useGetProjects();
   const { query, setQuery, projects: searchProjects, users, loading, error, } = useSearch();
-  const { selectedUserProjects, handleUserClick, clearSelectedUserProjects } = useGetProjectsByUserId()
+  const { selectedUserProjects, handleUserClick } = useGetProjectsByUserId()
 
   const displayProjects =
     query && users.length > 0 && selectedUserProjects
