@@ -1,8 +1,8 @@
 import axios from "axios";
 import { isMobile } from "../utils/detectDevice";
 
-const API_URL = process.env.REACT_APP_API_BASE_URL;
-
+//const API_URL = process.env.REACT_APP_API_BASE_URL;
+const API_URL ="https://devsconnect-bbwd.onrender.com/api"
 
 const api = axios.create({
   baseURL: API_URL,
