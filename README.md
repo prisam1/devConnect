@@ -8,7 +8,7 @@ A full-stack TypeScript web application where developers can:
 
 🚀 Post personal projects
 
-💬 Comment on others’ projects
+💬 Comment on other's projects
 
 🔍 Search users and projects
 
@@ -16,7 +16,7 @@ A full-stack TypeScript web application where developers can:
 
 Frontend
 
-React + Vite
+React
 
 TypeScript
 
