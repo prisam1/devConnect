@@ -3,14 +3,14 @@ import { useProjectDetail } from "../../hooks/useProjects";
 import { useAddComment } from "../../hooks/useAddComment";
 
 export default function ProjectDetail() {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
 
   const { project, loading, error, refetch } = useProjectDetail(id);
   const { comment, handleChange, handleSubmit, loading: commentLoading, error: commentError } = useAddComment(id, refetch);
 
   if (loading) return <p className="text-center mt-10">Loading project...</p>;
   if (error || !project) return <p className="text-center mt-10 text-red-500">{error || "Project not found."}</p>;
-
+  
   return (
     <div className="max-w-3xl mx-auto p-6">
       <h1 className="text-2xl text-black font-bold mb-2">{project?.project?.title}</h1>

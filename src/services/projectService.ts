@@ -7,7 +7,7 @@ export const getAllProjects = async (): Promise<ProjectType[]> => {
 };
 
 export const getProjectById = async (id: string): Promise<{ project: ProjectType; comments: CommentType[] }> => {
-  const response = await api.get(`/projects/${id}`);
+  const response = await api.get(`/projects/${id}`); 
   return response.data;
 };
 
@@ -17,7 +17,7 @@ export const addProject = async (data: { title: string; description: string; liv
 };
 
 export const getProjectsByUserId = async (userId: string): Promise<ProjectType[]> => {
-  const response = await api.get(`/projects/${userId}`);
+  const response = await api.get(`/projects/user/${userId}`);
   return response.data;
 };
 

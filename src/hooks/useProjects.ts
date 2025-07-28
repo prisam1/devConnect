@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from "react"; 
 import { addProject, getAllProjects, getProjectById, getProjectsByUserId } from "../services/projectService";
-import { ProjectType } from "../types";
+import { CommentType, ProjectType } from "../types";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'sonner';
 
 export const useGetProjects = () => {
     const [projects, setProjects] = useState<ProjectType[]>([]);
@@ -43,10 +44,12 @@ export const useGetProjects = () => {
       try {
         await addProject(form);
         navigate("/dashboard");
+        toast.success("Project added successfully!")
       } catch (err: any) {
         setError(err.response?.data?.message || err.message);
       } finally {
         setLoading(false);
+        toast.error("Failed to add project!")
       }
     };
   
@@ -55,15 +58,16 @@ export const useGetProjects = () => {
 
   
   export const useProjectDetail = (id?: string) => {
-    const [project, setProject] = useState<any>(null);
+    const [project, setProject] = useState<{ project: ProjectType; comments: CommentType[];} |null >(null)
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
   
     const fetch = useCallback(async () => {
       if (!id) return;
       setLoading(true);
+      setError(null);
       try {
-        const res = await getProjectById(id);
+        const res = await getProjectById(id); 
         setProject(res);
       } catch (err: any) {
         setError(err.response?.data?.message || err.message);
