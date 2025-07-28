@@ -3,7 +3,7 @@ import { logout as logoutAction } from "../redux/slices/authSlice"
 import { UserSelector } from "../redux/slices/userSlice"
 import { useDispatch, useSelector } from "react-redux";
 import { LogOut } from "lucide-react";
-
+import { toast } from 'sonner';
 
 export default function Header() {
 
@@ -12,6 +12,7 @@ export default function Header() {
 
   const HandleLogout = () => {
     dispatch(logoutAction());
+    toast.success('Logout successfully!')
   }
 
   return (

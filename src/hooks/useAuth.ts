@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUserDetails } from "../redux/slices/userSlice";
 import { login as loginAction} from "../redux/slices/authSlice" 
-import { useToast } from "./useToast";
+import { toast } from 'sonner';
 
   export const useLogin = () => {
 
@@ -13,9 +13,7 @@ import { useToast } from "./useToast";
     const [error, setError] = useState<string | null>(null);
 
     const dispatch = useDispatch();
-     const toast = useToast();
-
-  
+    
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setForm({ ...form, [e.target.name]: e.target.value });
     };
@@ -29,7 +27,7 @@ import { useToast } from "./useToast";
        dispatch(loginAction()); 
        toast.success("Login Successfully!")
       } catch (err: any) {
-        setError(err.response?.data?.message || err.message);
+        setError(err?.response?.data?.error); 
         toast.error("Login Failed!")
       }
     };
@@ -42,8 +40,7 @@ export const useSignup = () => {
   const [form, setForm] = useState<SignUpCredentials>({ username: "", email: "", password: "" });
   const [error, setError] = useState<string | null>(null);
 
-  const navigate = useNavigate();
-  const toast = useToast()
+  const navigate = useNavigate(); 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -57,7 +54,7 @@ export const useSignup = () => {
       navigate("/login", { replace: true });
       toast.success("Registered successfully! ")
     } catch (err: any) {
-      setError(err.response?.data?.message || err.message);
+      setError(err.response?.data?.error || err.message);
       toast.error("User registration failed!")
     }
   };
