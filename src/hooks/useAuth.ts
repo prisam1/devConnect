@@ -23,7 +23,8 @@ import { toast } from 'sonner';
       setError(null); 
       try { 
        const data = await login(form); 
-       dispatch(setUserDetails(data));
+
+       dispatch(setUserDetails(data.data));
        dispatch(loginAction()); 
        toast.success("Login Successfully!")
       } catch (err: any) {

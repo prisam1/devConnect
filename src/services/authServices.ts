@@ -7,6 +7,6 @@ export const signUp = async (credentials: SignUpCredentials): Promise<SignUpResp
 };
 
 export const login = async (credentials: LoginCredentials): Promise<LoginResponse> => {
-  const response = await api.post<LoginResponse>("/auth/login", credentials);
+  const response = await api.post<LoginResponse>("/auth/login", credentials); 
   return response.data;
 };

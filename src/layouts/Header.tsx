@@ -20,7 +20,7 @@ export default function Header() {
       <div className="max-w-full mx-auto flex justify-between">
         <Link to="/" className="font-bold text-xl">DevConnect</Link>
         <div className="flex flex-row space-x-4 ">
-          <Link to="/profile">Hi,{user.username}</Link>
+          <Link to="/profile">Hi, {user.username}</Link>
           <button
             onClick={HandleLogout}
             className="flex items-center gap-2 cursor-pointer">

@@ -13,7 +13,11 @@ export interface LoginCredentials {
   password: string;
 }
 
-export interface LoginResponse extends UserType {}
+export interface LoginResponse {
+  message:string;
+  access_token:string;
+  data:UserType;
+}
 
 
 // export interface AddProjectPayload {
