@@ -1,3 +1,5 @@
+# live -https://devsconnect.netlify.app
+
 DevConnect: Full Stack Project Portfolio App
 
 A full-stack TypeScript web application where developers can:
@@ -90,7 +92,7 @@ npm run dev
 MongoDB URI in .env
 JWT_SECRET=devConnect
 PORT=8000
-MONGO_URI=mongodb+srv://pritamsam1:Pritamsam1@project.383arvg.mongodb.net/post_project
+MONGO_URI=MONGO_URI
  
 
 
@@ -100,7 +102,7 @@ npm install
 npm run dev
 
 
-##🙌 Author
+## 🙌 Author
 Made with ❤️ by Pritam Kumar Samaddar
 
 Feel free to contribute or fork the project!
