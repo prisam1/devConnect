@@ -11,7 +11,7 @@ export const getProjectById = async (id: string): Promise<{ project: ProjectType
   return response.data;
 };
 
-export const addProject = async (data: { title: string; description: string; liveLink: string; gitHubLink: string }): Promise<ProjectType> => {
+export const addProject = async (data: { title: string; description: string; liveLink?: string; gitHubLink: string }): Promise<ProjectType> => {
   const response = await api.post<ProjectType>("/projects", data);
   return response.data;
 };

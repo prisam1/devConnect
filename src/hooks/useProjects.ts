@@ -28,33 +28,55 @@ export const useGetProjects = () => {
   };
 
   export const useAddProject = () => {
-    const [form, setForm] = useState({ title: "", description: "", liveLink: "", gitHubLink:"" });
-    const [error, setError] = useState<string | null>(null);
-    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
   
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      setForm({ ...form, [e.target.name]: e.target.value });
-    };
-  
-    const handleSubmit = async (e: React.FormEvent) => {
-      e.preventDefault();
-      setError(null);
-      setLoading(true);
+    const handleSubmit = async (form: {
+      title: string;
+      description: string;
+      liveLink?: string;
+      gitHubLink: string;
+    }) => {
       try {
         await addProject(form);
+        toast.success("Project added successfully!");
         navigate("/dashboard");
-        toast.success("Project added successfully!")
       } catch (err: any) {
-        setError(err.response?.data?.message || err.message);
-      } finally {
-        setLoading(false);
-        toast.error("Failed to add project!")
+        toast.error(err.response?.data?.message || "Failed to add project!");
+        throw new Error(err.response?.data?.message || err.message);
       }
     };
   
-    return { form, handleChange, handleSubmit, error, loading };
+    return { handleSubmit };
   };
+
+  // export const useAddProject = () => {
+  //   const [form, setForm] = useState({ title: "", description: "", liveLink: "", gitHubLink:"" });
+  //   const [error, setError] = useState<string | null>(null);
+  //   const [loading, setLoading] = useState(false);
+  //   const navigate = useNavigate();
+  
+  //   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  //     setForm({ ...form, [e.target.name]: e.target.value });
+  //   };
+  
+  //   const handleSubmit = async (e: React.FormEvent) => {
+  //     e.preventDefault();
+  //     setError(null);
+  //     setLoading(true);
+  //     try {
+  //       await addProject(form);
+  //       navigate("/dashboard");
+  //       toast.success("Project added successfully!")
+  //     } catch (err: any) {
+  //       setError(err.response?.data?.message || err.message);
+  //     } finally {
+  //       setLoading(false);
+  //       toast.error("Failed to add project!")
+  //     }
+  //   };
+  
+  //   return { form, handleChange, handleSubmit, error, loading };
+  // };
 
   
   export const useProjectDetail = (id?: string) => {
